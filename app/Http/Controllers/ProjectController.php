@@ -43,7 +43,7 @@ class ProjectController extends Controller
         $this->authorize('create',Educatione::class);
         $data=$request->validate([
             'head'=>'string',
-            'description'=>'required|string|max:20',
+            'description'=>'required',
             'img_project'=>'required|image',
             'educationes_id'=>'required|array'
         ]);
@@ -60,7 +60,11 @@ class ProjectController extends Controller
         $projects->categore_id=$request->categore_id;
         $projects->save();
 
-        $projects->educationes()->attach($request->educationes_id);
+        $arr=$request->educationes_id;
+        for ($i=0; $i <count($arr) ; $i++) {
+            $arr1[]=intval($arr[$i]);
+        }
+        $projects->educationes()->attach($arr);
         return response()->json([
             "masseg"=>"insert projects"
         ]);

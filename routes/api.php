@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('login', [AuthControler::class,'login']);
+Route::post('login', [AuthControler::class,'login'])->name('login');
 Route::post('regster', [AuthControler::class,'regster']);
 
 
